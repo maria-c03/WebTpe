@@ -15,13 +15,14 @@ class JuegoController{
 
     function showJuegos(){
         $juegos = $this->model->getJuegos();
-        $idGeneroDistinto = $this->modelGenero->getIdGenero();
+        $idGeneroDistinto = $this->modelGenero->getIdGeneroDistintos();
         $this->view->showJuegos($juegos, $idGeneroDistinto);
     }
 
-    function showJuego($id){
-        $juego = $this->model->getJuego($id);
-        $this->view->showJuego($juego);
+    function showJuego($idJuego){
+        $juego = $this->model->getJuego($idJuego);
+        $genero = $this->modelGenero->getGenero($juego->id_genero);
+        $this->view->showJuego($juego, $genero);
     }
 
     function addJuego(){
@@ -40,7 +41,7 @@ class JuegoController{
 
     function changeJuego($id){
         $juego = $this->model->getJuego($id);
-        $idGeneroDistinto = $this->modelGenero->getIdGenero();
+        $idGeneroDistinto = $this->modelGenero->getIdGeneroDistintos();
         $this->view->juegoToModify($juego, $idGeneroDistinto);
     }
 
@@ -54,6 +55,10 @@ class JuegoController{
 
     }
 
-
+    function getJuegosByGenero($idGenero){
+        $juegosByGenero = $this->model->getJuegoByIdGenero($idGenero);
+        $genero = $this->modelGenero->getGenero($idGenero);
+        $this->view->juegosByGenero($juegosByGenero, $genero);
+    }
 
 }

@@ -17,9 +17,10 @@ class JuegoView{
         $this->smarty->display('juegosList.tpl');
     }
 
-    public function showJuego($juego) {
+    public function showJuego($juego, $genero) {
         // asigno variables al tpl smarty
         $this->smarty->assign('detalleJuego', $juego);
+        $this->smarty->assign('genero', $genero);
 
         // mostrar el tpl
         $this->smarty->display('verJuego.tpl');
@@ -29,5 +30,11 @@ class JuegoView{
         $this->smarty->assign('juegoData', $juego);
         $this->smarty->assign('listaIdGenero', $idGeneroDistinto);
         $this->smarty->display('modifyJuego.tpl');
+    }
+
+    public function juegosByGenero($juegosByGenero, $genero){
+        $this->smarty->assign('listaJuegosByGenero',$juegosByGenero);
+        $this->smarty->assign('genero',$genero);
+        $this->smarty->display('showListaJuegosByGenero.tpl');
     }
 }

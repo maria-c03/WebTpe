@@ -5,10 +5,12 @@ require_once './app/views/GeneroView.php';
 class GeneroController{
     private $model;
     private $view;
+    private $modelJuego;
 
     public function __construct() {
         $this->model = new GeneroModel();
         $this->view = new GeneroView();
+        $this->modelJuego = new JuegoModel();
     }
 
     function showGeneros(){
@@ -23,8 +25,13 @@ class GeneroController{
         header("Location: ".BASE_URL."generos");
     }
 
-    function removeGenero($id){
-        $this->model->deleteGenero($id);
+    function removeGenero($idGenero){
+        //si existe un juego con el id de ese genero, no se permite borrar
+        $getJuegos=$this->modelJuego->getJuegoByIdGenero($idGenero);
+        if(empty($getJuegos)){
+            $this->model->deleteGenero($idGenero);
+        }
+    
         header("Location: ".BASE_URL."generos");
     }
 

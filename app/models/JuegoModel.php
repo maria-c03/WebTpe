@@ -38,11 +38,11 @@ class JuegoModel{
         $sentencia = $this->db->prepare("DELETE FROM juego WHERE id_juego=?");
         $sentencia->execute(array($id));
     }
-    
-    function getIdGeneroDistintos(){
-        $query = $this->db->prepare("SELECT DISTINCT(id_genero) FROM juego");
-        $query->execute();
-        $idGeneroDistinto = $query->fetchAll(PDO::FETCH_OBJ);
-        return $idGeneroDistinto;
+
+    function getJuegoByIdGenero($idGenero){
+        $sentencia = $this->db->prepare('SELECT * FROM juego WHERE id_genero=?');
+        $sentencia->execute(array($idGenero));
+        $juegos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        return $juegos;
     }
 }

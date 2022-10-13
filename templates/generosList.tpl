@@ -17,7 +17,11 @@
                 <th scope="row">{$genero->id_genero}</th>
                 <td>{$genero->nombre}</td>
                 <td>{$genero->descripcion} </td>
-                <td><a href='changeGenero/{$genero->id_genero}' type='button' class='btn btn-success'>Modificar</a> <a href='removeGenero/{$genero->id_genero}' type='button' class='btn btn-danger'>Borrar</a> </td>
+                <td>
+                    <a href='changeGenero/{$genero->id_genero}' type='button' class='btn btn-success'>Modificar</a> 
+                    <a href='juegosByGenero/{$genero->id_genero}' type='button' class='btn btn-info'>Mostrar Juegos</a> 
+                    <a href='removeGenero/{$genero->id_genero}' type='button' class='btn btn-danger'>Borrar</a> 
+                </td>
             </tr>
         {/foreach}
     </tbody>

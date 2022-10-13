@@ -13,7 +13,7 @@ class GeneroModel{
         $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $generos;
     }
-
+    
     function getGenero($id){
         $query = $this->db->prepare("SELECT * FROM genero WHERE id_genero=?");
         $query->execute(array($id));
@@ -39,8 +39,8 @@ class GeneroModel{
         $sentencia->execute(array($id));
     }
 
-    function getIdGenero(){
-        $query = $this->db->prepare("SELECT id_genero FROM genero");
+    function getIdGeneroDistintos(){
+        $query = $this->db->prepare("SELECT DISTINCT(id_genero) FROM juego");
         $query->execute();
         $idGeneroDistinto = $query->fetchAll(PDO::FETCH_OBJ);
         return $idGeneroDistinto;

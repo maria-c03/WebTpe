@@ -37,6 +37,10 @@ switch ($params[0]) {
         $juegoController = new JuegoController();
         $juegoController->modifyJuego($params[1]);
         break;
+    case 'juegosByGenero':
+        $juegoController = new JuegoController();
+        $juegoController->getJuegosByGenero($params[1]);
+        break;
     case 'generos':
         $generoController = new GeneroController();
         $generoController->showGeneros();
