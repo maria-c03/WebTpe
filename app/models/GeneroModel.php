@@ -13,7 +13,14 @@ class GeneroModel{
         $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
         return $generos;
     }
-    
+
+    function getGenero($id){
+        $query = $this->db->prepare("SELECT * FROM genero WHERE id_genero=?");
+        $query->execute(array($id));
+        $genero = $query->fetch(PDO::FETCH_OBJ);
+        return $genero;
+    }
+
     //agregar un genero(ALTA)
     function insertGenero($nombre, $descripcion){
         $query = $this->db->prepare("INSERT INTO genero(nombre, descripcion) VALUES(?, ?)");
@@ -28,8 +35,15 @@ class GeneroModel{
     
     //borrar un genero (BAJA)
     function deleteGenero($id){
-        $sentencia = $this->db->prepare("DELETE FROM genero WHERE id=?");
+        $sentencia = $this->db->prepare("DELETE FROM genero WHERE id_genero=?");
         $sentencia->execute(array($id));
+    }
+
+    function getIdGenero(){
+        $query = $this->db->prepare("SELECT id_genero FROM genero");
+        $query->execute();
+        $idGeneroDistinto = $query->fetchAll(PDO::FETCH_OBJ);
+        return $idGeneroDistinto;
     }
     
 }

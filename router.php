@@ -37,6 +37,26 @@ switch ($params[0]) {
         $juegoController = new JuegoController();
         $juegoController->modifyJuego($params[1]);
         break;
+    case 'generos':
+        $generoController = new GeneroController();
+        $generoController->showGeneros();
+        break;
+    case 'addGenero':
+        $generoController = new GeneroController();
+        $generoController->addGenero();
+        break;
+    case 'removeGenero':
+        $generoController = new GeneroController();
+        $generoController->removeGenero($params[1]);
+        break;
+    case 'changeGenero':
+        $generoController = new GeneroController();
+        $generoController->changeGenero($params[1]);
+        break;
+    case 'modifyGenero':
+        $generoController = new GeneroController();
+        $generoController->modifyGenero($params[1]);
+        break;
     default:
         echo ('404 Page not found');
         break;

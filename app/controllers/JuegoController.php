@@ -4,16 +4,18 @@ require_once './app/views/JuegoView.php';
 
 class JuegoController{
     private $model;
+    private $modelGenero;
     private $view;
 
     public function __construct() {
         $this->model = new JuegoModel();
+        $this->modelGenero = new GeneroModel();
         $this->view = new JuegoView();
     }
 
     function showJuegos(){
         $juegos = $this->model->getJuegos();
-        $idGeneroDistinto = $this->model->getIdGeneroDistintos();
+        $idGeneroDistinto = $this->modelGenero->getIdGenero();
         $this->view->showJuegos($juegos, $idGeneroDistinto);
     }
 
@@ -38,7 +40,7 @@ class JuegoController{
 
     function changeJuego($id){
         $juego = $this->model->getJuego($id);
-        $idGeneroDistinto = $this->model->getIdGeneroDistintos();
+        $idGeneroDistinto = $this->modelGenero->getIdGenero();
         $this->view->juegoToModify($juego, $idGeneroDistinto);
     }
 

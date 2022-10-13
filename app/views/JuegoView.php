@@ -1,8 +1,7 @@
 <?php
 require_once './libs/smarty-4.2.1/libs/Smarty.class.php';
 
-class JuegoView
-{
+class JuegoView{
     private $smarty;
 
     public function __construct() {
