@@ -22,13 +22,20 @@ class AuthController {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $user = $this->model->getUser($email);
-            
-            if($user && password_verify($password, $user->password)){
-                session_start();
-                $_SESSION['email'] = $email;
+            if(!$user){
+                //flujo de registro
+                $passwordHashed =password_hash($password, PASSWORD_BCRYPT) ;
+                $user = $this->model->addUser($email,$passwordHashed);
                 header('Location: '.BASE_URL.'juegos');
             }else{
-                $this->view->showLogin("Acceso denegado");
+                //flujo de login
+                if(password_verify($password, $user->password)){
+                    session_start();
+                    $_SESSION['email'] = $email;
+                    header('Location: '.BASE_URL.'juegos');
+                }else{
+                    $this->view->showLogin("Acceso denegado");
+                }
             }
         }
     }

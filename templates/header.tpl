@@ -28,7 +28,10 @@
                         <a class="nav-link" href="generos">Genero de juegos </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login">Login</a>
+                        <a class="nav-link" href="login">Log in</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout">Log out</a>
                     </li>
                 </ul>
             </div>

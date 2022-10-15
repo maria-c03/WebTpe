@@ -7,11 +7,15 @@ class UserModel {
     }
 
     function getUser($email){
-        $query = $this->db->prepare("SELECT * FROM user WHERE email=?");
+        $query = $this->db->prepare('SELECT * FROM user WHERE email=?');
         $query->execute(array($email));
         $user = $query->fetch(PDO::FETCH_OBJ);
         return $user;
     }
 
+    function addUser($email, $password){
+        $query = $this->db->prepare('INSERT INTO user (email, password) VALUES(?,?)');
+        $query->execute(array($email, $password));
+    }
     
 }
