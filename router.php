@@ -1,6 +1,10 @@
 <?php
 require_once './app/controllers/JuegoController.php';
 require_once './app/controllers/GeneroController.php';
+require_once './app/controllers/AuthController.php';
+require_once './app/helpers/AuthHelper.php';
+
+
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
@@ -13,6 +17,18 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 
 switch ($params[0]) {
+    case 'login':
+        $authController = new AuthController();
+        $authController->showLogin();
+        break;
+    case 'verify':
+        $authController = new AuthController();
+        $authController->verifyLogin();
+        break;
+    case 'logout':
+        $authHelper = new AuthHelper();
+        $authHelper->logOut();
+        break;
     case 'juegos':
         $juegoController = new JuegoController();
         $juegoController->showJuegos();

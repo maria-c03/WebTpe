@@ -8,9 +8,9 @@ class GeneroModel{
     
     //listar los generos
     function getGeneros(){
-        $sentencia = $this->db->prepare('SELECT * FROM genero');
-        $sentencia->execute();
-        $generos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $query = $this->db->prepare('SELECT * FROM genero');
+        $query->execute();
+        $generos = $query->fetchAll(PDO::FETCH_OBJ);
         return $generos;
     }
     
@@ -29,18 +29,18 @@ class GeneroModel{
     
     //modificar un genero(MODIFICACION)
     function modifyGenero($id_genero, $nombre, $descripcion){
-        $sentencia = $this->db->prepare("UPDATE genero SET nombre=?, descripcion=? WHERE id_genero=?");
-        $sentencia->execute(array($nombre, $descripcion, $id_genero));
+        $query = $this->db->prepare("UPDATE genero SET nombre=?, descripcion=? WHERE id_genero=?");
+        $query->execute(array($nombre, $descripcion, $id_genero));
     }
     
     //borrar un genero (BAJA)
     function deleteGenero($id){
-        $sentencia = $this->db->prepare("DELETE FROM genero WHERE id_genero=?");
-        $sentencia->execute(array($id));
+        $query = $this->db->prepare("DELETE FROM genero WHERE id_genero=?");
+        $query->execute(array($id));
     }
 
     function getIdGeneroDistintos(){
-        $query = $this->db->prepare("SELECT DISTINCT(id_genero) FROM juego");
+        $query = $this->db->prepare("SELECT DISTINCT(id_genero) FROM genero");
         $query->execute();
         $idGeneroDistinto = $query->fetchAll(PDO::FETCH_OBJ);
         return $idGeneroDistinto;

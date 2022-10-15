@@ -8,9 +8,9 @@ class JuegoModel{
     
     //listar los items
     function getJuegos(){
-        $sentencia = $this->db->prepare('SELECT * FROM juego');
-        $sentencia->execute();
-        $juegos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $query = $this->db->prepare('SELECT * FROM juego');
+        $query->execute();
+        $juegos = $query->fetchAll(PDO::FETCH_OBJ);
         return $juegos;
     }
     
@@ -29,20 +29,20 @@ class JuegoModel{
     
     //modificar un juego(MODIFICACION)
     function modifyJuego($id, $nombre, $descripcion, $precio, $id_genero){
-        $sentencia = $this->db->prepare("UPDATE juego SET nombre=?, descripcion=?, precio=?, id_genero=? WHERE id_juego=?");
-        $sentencia->execute(array($nombre, $descripcion, $precio, $id_genero, $id));
+        $query = $this->db->prepare("UPDATE juego SET nombre=?, descripcion=?, precio=?, id_genero=? WHERE id_juego=?");
+        $query->execute(array($nombre, $descripcion, $precio, $id_genero, $id));
     }
     
     //borrar un juego (BAJA)
     function deleteJuego($id){
-        $sentencia = $this->db->prepare("DELETE FROM juego WHERE id_juego=?");
-        $sentencia->execute(array($id));
+        $query = $this->db->prepare("DELETE FROM juego WHERE id_juego=?");
+        $query->execute(array($id));
     }
 
     function getJuegoByIdGenero($idGenero){
-        $sentencia = $this->db->prepare('SELECT * FROM juego WHERE id_genero=?');
-        $sentencia->execute(array($idGenero));
-        $juegos = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        $query = $this->db->prepare('SELECT * FROM juego WHERE id_genero=?');
+        $query->execute(array($idGenero));
+        $juegos = $query->fetchAll(PDO::FETCH_OBJ);
         return $juegos;
     }
 }
