@@ -10,7 +10,7 @@
             <h5 class="card-title">Precio</h5>
             <p class="card-text">${$juegoByGenero->precio}</p>
             <h5 class="card-title">Genero</h5>
-            <p class="card-text">{$genero->nombre}</p>
+            <p class="card-text">{$juegoByGenero->nombreGenero}</p>
         </div>
     </div>
 {/foreach}

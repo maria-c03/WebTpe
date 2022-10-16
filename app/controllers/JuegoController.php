@@ -17,17 +17,18 @@ class JuegoController{
     }
 
     function showJuegos(){
-        $juegos = $this->model->getJuegos();
-        $idGeneroDistinto = $this->modelGenero->getIdGeneroDistintos();
-        $this->view->showJuegos($juegos, $idGeneroDistinto);
+        $isLoged = $this->authHelper->isLogged();
+        $juegosInformacion = $this->model->getJuegosInformacion();
+        $listaGeneros= $this->modelGenero->getGeneros();
+        $this->view->showJuegos($juegosInformacion, $listaGeneros, $isLoged);
     }
 
     function showJuego($idJuego){
-        $juego = $this->model->getJuego($idJuego);
-        $genero = $this->modelGenero->getGenero($juego->id_genero);
-        $this->view->showJuego($juego, $genero);
+        $juegoInformacion = $this->model->getJuegoInformacion($idJuego);
+        $this->view->showJuego($juegoInformacion);
     }
 
+    //guardo los valores de los input, le digo al modelo que lo agregue a la db
     function addJuego(){
         $this->authHelper->checkLoggedIn();
         $nombre = $_POST['nombreJuego'];
@@ -44,13 +45,15 @@ class JuegoController{
         header("Location: ".BASE_URL."juegos");
     }
 
+
     function changeJuego($id){
         $this->authHelper->checkLoggedIn();
-        $juego = $this->model->getJuego($id);
-        $idGeneroDistinto = $this->modelGenero->getIdGeneroDistintos();
-        $this->view->juegoToModify($juego, $idGeneroDistinto);
+        $juego = $this->model->getJuegoInformacion($id);
+        $listaGenero = $this->modelGenero->getGeneros();
+        $this->view->juegoToModify($juego, $listaGenero);
     }
 
+    //guardo los valores de los input,  le digo al modelo que lo modifique en la db
     function modifyJuego($id){
         $this->authHelper->checkLoggedIn();
         $nombre = $_POST['nombreJuego'];
@@ -62,10 +65,14 @@ class JuegoController{
 
     }
 
+    //obtengo todos los juegos que tengan un mismo genero
     function getJuegosByGenero($idGenero){
-        $juegosByGenero = $this->model->getJuegoByIdGenero($idGenero);
-        $genero = $this->modelGenero->getGenero($idGenero);
-        $this->view->juegosByGenero($juegosByGenero, $genero);
+        $listaJuegosporGenero = $this->model->getJuegosInformacionByGenero($idGenero);
+        if($listaJuegosporGenero){
+            $this->view->juegosByGenero($listaJuegosporGenero);
+        }else{
+            header("Location: ".BASE_URL."generos");
+        }
     }
 
 }

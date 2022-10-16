@@ -25,7 +25,10 @@ class AuthController {
             if(!$user){
                 //flujo de registro
                 $passwordHashed =password_hash($password, PASSWORD_BCRYPT) ;
-                $user = $this->model->addUser($email,$passwordHashed);
+                $this->model->addUser($email,$passwordHashed);
+                //abro la sesion y seteo el usuario para que quede logueado
+                session_start();
+                $_SESSION['email'] = $email;
                 header('Location: '.BASE_URL.'juegos');
             }else{
                 //flujo de login

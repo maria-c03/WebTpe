@@ -1,0 +1,8 @@
+.oculto{
+    display: none;
+}
+
+.cancelar:visited, .cancelar:link, .cancelar:active{
+    text-decoration: none;
+    color: white;
+}

@@ -8,8 +8,10 @@ class GeneroView{
         $this->smarty = new Smarty();
     }
 
-    public function showGeneros($generos) {
+    public function showGeneros($generos, $isLoged) {
         $this->smarty->assign('listaGeneros', $generos);
+        $this->smarty->assign('isLoged', $isLoged);
+
         $this->smarty->display('generosList.tpl','addGenero.tpl');
         // $this->smarty->display('addGenero.tpl');
     }

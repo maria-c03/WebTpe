@@ -40,7 +40,7 @@ class GeneroModel{
     }
 
     function getIdGeneroDistintos(){
-        $query = $this->db->prepare("SELECT DISTINCT(id_genero) FROM genero");
+        $query = $this->db->prepare("SELECT id_genero FROM genero");
         $query->execute();
         $idGeneroDistinto = $query->fetchAll(PDO::FETCH_OBJ);
         return $idGeneroDistinto;

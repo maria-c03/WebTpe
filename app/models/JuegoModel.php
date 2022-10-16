@@ -45,4 +45,30 @@ class JuegoModel{
         $juegos = $query->fetchAll(PDO::FETCH_OBJ);
         return $juegos;
     }
+
+    //busco los juegos y los nombres de genero que le corresponden a cada uno
+    function getJuegosInformacion(){
+        $query = $this->db->prepare('SELECT j.id_juego, j.nombre, j.descripcion, j.precio, j.id_genero, g.nombre as nombreGenero FROM juego j JOIN genero g ON g.id_genero = j.id_genero');
+        $query->execute();
+        $juegos = $query->fetchAll(PDO::FETCH_OBJ);
+        return $juegos;
+    }
+
+    //busco el juego y el nombre de genero que le corresponde
+    function getJuegoInformacion($idJuego){
+        $query = $this->db->prepare('SELECT j.id_juego, j.nombre, j.descripcion, j.precio, j.id_genero, g.nombre as nombreGenero FROM juego j JOIN genero g ON g.id_genero = j.id_genero WHERE j.id_juego=?');
+        $query->execute(array($idJuego));
+        $juego = $query->fetch(PDO::FETCH_OBJ);
+        return $juego;
+    }
+    
+    //busco todos los juegos y los nombres de genero de un genero
+    function getJuegosInformacionByGenero($idGenero){
+        $query = $this->db->prepare('SELECT j.id_juego, j.nombre, j.descripcion, j.precio, j.id_genero, g.nombre as nombreGenero FROM juego j JOIN genero g ON g.id_genero = j.id_genero WHERE g.id_genero=?');
+        $query->execute(array($idGenero));
+        $juegosByGenero = $query->fetchAll(PDO::FETCH_OBJ);
+        return $juegosByGenero;
+    }
+
 }
+

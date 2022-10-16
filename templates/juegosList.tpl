@@ -1,27 +1,48 @@
 {include file="header.tpl" }
-{include file="addJuego.tpl"}
+{if ($isLoged == true)}
+    {include file="addJuego.tpl"}
+{/if}
 
 
-<table class="table table-striped">
+
+<table class="table table-striped mt-4">
     <thead>
         <tr>
-            <th scope="col">Id juego</th>
+            <th scope="col" class="oculto">Id juego</th>
             <th scope="col">Nombre</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Precio</th>
-            <th scope="col">Id genero</th>
-            <th scope="col">Opciones</th>
+            <th scope="col">Genero</th>
+            {if ($isLoged == true)}
+                <th scope="col">Modificar</th>
+            {/if}
+            <th scope="col">Informacion</th>
+            {if ($isLoged == true)}
+                <th scope="col">Eliminar</th>
+            {/if}
         </tr>
     </thead>
     <tbody>
-        {foreach from=$listaJuegos item=$juego}
+        {foreach from=$listaJuegoInformacion item=$juegoInformacion}
             <tr>
-                <th scope="row">{$juego->id_juego}</th>
-                <td>{$juego->nombre}</td>
-                <td>{$juego->descripcion} </td>
-                <td>{$juego->precio}</td>
-                <td>{$juego->id_genero}</td>
-                <td><a href='change/{$juego->id_juego}' type='button' class='btn btn-success'>Modificar</a> <a href='remove/{$juego->id_juego}' type='button' class='btn btn-danger'>Borrar</a> <a href='show/{$juego->id_juego}' type='button' class='btn btn-info'>Mostrar</a></td>
+                <th scope="row" class="oculto">{$juegoInformacion->id_juego}</th>
+                <td>{$juegoInformacion->nombre}</td>
+                <td>{$juegoInformacion->descripcion} </td>
+                <td>{$juegoInformacion->precio}</td>
+                <td>{$juegoInformacion->nombreGenero}</td> {*tiene que verse el nombre de la categoria no el id*}
+                {if ($isLoged == true)}
+                    <td>
+                        <a href='change/{$juegoInformacion->id_juego}' type='button' class='btn btn-success'>Modificar</a>
+                    </td>
+                {/if}
+                <td>
+                    <a href='show/{$juegoInformacion->id_juego}' type='button' class='btn btn-info'>Ver mas</a>
+                </td>
+                {if $isLoged == true}
+                    <td>
+                        <a href='remove/{$juegoInformacion->id_juego}' type='button' class='btn btn-danger'>Borrar</a>
+                    </td>
+                {/if}
             </tr>
         {/foreach}
     </tbody>

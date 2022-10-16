@@ -19,8 +19,9 @@ class GeneroController{
     }
 
     function showGeneros(){
+        $isLoged = $this->authHelper->isLogged();
         $generos = $this->model->getGeneros();
-        $this->view->showGeneros($generos);
+        $this->view->showGeneros($generos, $isLoged);
     }
 
     function addGenero(){
